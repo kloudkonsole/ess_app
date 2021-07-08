@@ -1,0 +1,101 @@
+[
+	["models", "type", "po/Collection", [
+		"data", 1, "opt"
+	]],
+	["Frame", "view", [
+		["options", "map", {"el": ".__", "class": "bg-white text-gray-800 h-screen overflow-hidden flex"}],
+		["backend", "ref", "backend"],
+		["auth", "models", [
+			["backend", "ref", "backend"]
+		], "auth"],
+		["settings", "models", [
+			["backend", "ref", "backend"]
+		], "settings"],
+		["events", "models", [
+			["opt", "map", {"idAttr": "i"}],
+			["auth", "ref", "auth"]
+		], "events"],
+		["routes", "map", {
+			"/login": [null, "login"],
+			"/": ["menu", "home"],
+			"/cat": ["menu", "cat"],
+			"/fav": ["menu", "fav"],
+			"/find": ["menu", "find"],
+			"/leave/:id": ["menu", "leave"]
+		}],
+		["content", "view", [
+			["options", "map", {"class": "bg-white h-full w-full overflow-y-auto"}],
+			["pages", "map", {
+				"login": ["Screen", "view", [
+					["options", "map", {"class": "relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-center bg-no-repeat bg-cover"}],
+					["wallpaper", "text", "/dat/bg.jpg"],
+					["backend", "ref", "backend"],
+					["auth", "ref", "auth"],
+					["Modal", "view", [
+						["options", "map", {"class":"p5 m5 text-gray-500 outline-gray-500 flex flex-row"}],
+						["tmpl", "file", "modal.asp"],
+						["title", "text", "Welcom Back!"],
+						["buttons", "map", {
+							"cancel": "Cancel",
+							"submit": "OK"
+						}],
+						["Form", "view", [
+							["fields", "list", [
+								["email", "email", "Email"],
+								["password", "password", "Password"]
+							]]
+						]],
+						["auth", "ref", "auth"]
+					]]
+				]],
+				"home": ["Page", "view", [
+					["options", "map", {"class": "-full w-full px-5 pt-6 pb-20 overflow-y-auto"}],
+					["tmpl", "file", "home.asp"],
+					["menu", "list", [
+						{"name": "Today", "router": "/", "state": "sel", "icon": "mdi mdi-newspaper-variant-outline"},
+						{"name": "Categories", "router": "/cat", "state": "unsel", "icon": "mdi mdi-apps"},
+						{"name": "Favorites", "router": "/fav", "state": "unsel", "icon": "mdi mdi-star-outline"},
+						{"name": "Search", "router": "/find", "state": "unsel", "icon": "mdi mdi-magnify"}
+					]]
+				]],
+				"cat": ["Page", "view", [
+					["options", "map", {"class": "h-full w-full px-5 pt-6 pb-20 overflow-y-auto"}],
+					["tmpl", "file", "event.asp"],
+					["menu", "list", [
+						{"name": "Today", "router": "/", "state": "unsel", "icon": "mdi mdi-newspaper-variant-outline"},
+						{"name": "Categories", "router": "/cat", "state": "sel", "icon": "mdi mdi-apps"},
+						{"name": "Favorites", "router": "/fav", "state": "unsel", "icon": "mdi mdi-star-outline"},
+						{"name": "Search", "router": "/find", "state": "unsel", "icon": "mdi mdi-magnify"}
+					]],
+					["events", "ref", "events"]
+				], ["page", "eventPage"]],
+				"fav": ["Page", "view", [
+					["options", "map", {"class": "h-full w-full px-5 pt-6 pb-20 overflow-y-auto"}],
+					["tmpl", "file", "home.asp"],
+					["menu", "list", [
+						{"name": "Today", "router": "/", "state": "unsel", "icon": "mdi mdi-newspaper-variant-outline"},
+						{"name": "Categories", "router": "/cat", "state": "unsel", "icon": "mdi mdi-apps"},
+						{"name": "Favorites", "router": "/fav", "state": "sel", "icon": "mdi mdi-star-outline"},
+						{"name": "Search", "router": "/find", "state": "unsel", "icon": "mdi mdi-magnify"}
+					]],
+					["backend", "ref", "backend"]
+				]],
+				"find": ["Page", "view", [
+					["options", "map", {"class": "h-full w-full px-5 pt-6 pb-20 overflow-y-auto"}],
+					["tmpl", "file", "home.asp"],
+					["menu", "list", [
+						{"name": "Today", "router": "/", "state": "unsel", "icon": "mdi mdi-newspaper-variant-outline"},
+						{"name": "Categories", "router": "/cat", "state": "unsel", "icon": "mdi mdi-apps"},
+						{"name": "Favorites", "router": "/fav", "state": "unsel", "icon": "mdi mdi-star-outline"},
+						{"name": "Search", "router": "/find", "state": "sel", "icon": "mdi mdi-magnify"}
+					]],
+					["backend", "ref", "backend"]
+				]]
+			}]
+		]],
+		["menu", "view", [
+			["options", "map", {"class": "hidden bg-white absolute bottom-0 w-full border-t border-gray-200 flex"}],
+			["tmpl", "file", "menu.asp"]
+		]]
+	]]
+]
